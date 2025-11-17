@@ -126,5 +126,20 @@ namespace DotVVM.AMP.Writer
         {
             writer.SetErrorContext(obj);
         }
-    }
+
+		public void WriteKnockoutDataBindComment(string name, string expression)
+		{
+            writer.WriteKnockoutDataBindComment(name, expression);
+        }
+
+		public void WriteKnockoutDataBindEndComment()
+		{
+            writer.WriteKnockoutDataBindEndComment();
+		}
+
+		public void WriteUnencodedWhitespace(string text)
+		{
+			writer.WriteUnencodedWhitespace(text);
+        }
+	}
 }

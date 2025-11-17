@@ -13,17 +13,16 @@ using DotVVM.Framework.ViewModel.Serialization;
 
 namespace DotVVM.AMP.Presenter
 {
-    public class DotvvmAmpPresenter : DotvvmPresenter, IAmpPresenter
+    public class DotvvmAmpPresenter : DotvvmPresenter, IAmpPresenter, IDotvvmPresenter
     {
         private readonly Func<IAmpStylesheetResourceCollection> ampStylesheetResourceCollectionFactory;
 
-        public DotvvmAmpPresenter(DotvvmConfiguration configuration,Func<IAmpStylesheetResourceCollection> ampStylesheetResourceCollectionFactory, IAmpDotvvmViewBuilder viewBuilder, IViewModelLoader viewModelLoader, IViewModelSerializer viewModelSerializer, IAmpOutputRenderer outputRender, ICsrfProtector csrfProtector, IViewModelParameterBinder viewModelParameterBinder, IStaticCommandServiceLoader staticCommandServiceLoader) : base(configuration, viewBuilder, viewModelLoader, viewModelSerializer, outputRender, csrfProtector, viewModelParameterBinder, staticCommandServiceLoader)
+        public DotvvmAmpPresenter(DotvvmConfiguration configuration,Func<IAmpStylesheetResourceCollection> ampStylesheetResourceCollectionFactory, IAmpDotvvmViewBuilder viewBuilder, IViewModelLoader viewModelLoader, IViewModelSerializer viewModelSerializer, IAmpOutputRenderer outputRender, ICsrfProtector csrfProtector, IViewModelParameterBinder viewModelParameterBinder, StaticCommandExecutor staticCommandExecutor) : base(configuration, viewBuilder, viewModelLoader, viewModelSerializer, outputRender, csrfProtector, viewModelParameterBinder, staticCommandExecutor)
         {
             this.ampStylesheetResourceCollectionFactory = ampStylesheetResourceCollectionFactory;
         }
 
-        
-        public async Task ProcessRequest(IDotvvmRequestContext context)
+        public async Task ProcessRequest(DotvvmRequestContext context)
         {
             context.ResourceManager.RegisterProcessor(GetCssBundlerProcessor());
             context.ResourceManager.RegisterProcessor(GetAmpAllowedResourcesProcessor());
